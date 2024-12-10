@@ -1,22 +1,26 @@
 from PIL import Image, ImageEnhance, ImageFilter
 import os
 
-path = "./imgs" # folder for unedited images
-pathOut = "./editedImgs" # folder for edited images
+p = " " # unedited
+pathOut = " " # folder for edited images
 
-for filename in os.listdir(path):
-    img = Image.open(f"{path}/{filename}")
+from PIL import Image, ImageEnhance, ImageFilter
+import os
 
-    # sharpening, BW
-    edit = img.filter(ImageFilter.SHARPEN).convert('L').rotate(-90)
+# folder for unedited images
+p = "D:\\downloads\\WhatsApp.jpg"
+pathOut = "D:\\downloads" # folder for edited images
 
-    # contrast
-    factor = 1.5
-    enhancer = ImageEnhance.Contrast(edit)
-    edit = enhancer.enhance(factor)
+img = Image.open(p)
 
-    # ADD MORE EDITS FROM DOCUMENTATION https://pillow.readthedocs.io/en/stable/
+# sharpening, BW
+edit = img.filter(ImageFilter.SHARPEN).convert('L')
 
-    clean_name = os.path.splitext(filename)[0]
+# contrast
+factor = 1.5
+enhancer = ImageEnhance.Contrast(edit)
+edit = enhancer.enhance(factor)
 
-    edit.save(f'.{pathOut}/{clean_name}_edited.jpg')
+clean_name = os.path.splitext(os.path.basename(p))[0]
+
+edit.save(f'{pathOut}/{clean_name}_edited.jpg')
